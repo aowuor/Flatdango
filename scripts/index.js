@@ -12,8 +12,9 @@
 let newMovieDetails = {};
 // let currentMovie;
 
-customFetch("http://localhost:3000/films", "GET");
+//SECTION: HANDLES FRONTEND DISPLAY-----------------------------------------------------------
 
+customFetch("http://localhost:3000/films", "GET");
 
 // Renders list of all movies
 function displaylist(movies){
@@ -52,18 +53,29 @@ function displayMovieDetails(movie){
     })
 }
 
+function handlePostUpdateDelete(){
+    let updatebtn = document.getElementById('updatebtn')
+    let addbtn = document.getElementById('addbtn')
+    let deletebtn = document.getElementById('deletebtn')
+
+    updatebtn.addEventListener("click", updateMovie)
+    addbtn.addEventListener("click", postMovie)
+    deletebtn.addEventListener("click", deleteMovie)
+
+}
+
+handlePostUpdateDelete()
+
+// SECTION: POST, PATCH AND DELETE FUNCTIONS--------------------------------------------------
 // Deletes movie of specific id
 function deleteMovie(){
     let deleteForm = document.getElementById('deleteForm')
     deleteForm.addEventListener("submit", (e) => {
         e.preventDefault()
         let id = deleteForm.delete.value
-        customFetch(`http://localhost:3000/films/${id}`, "DELETE")  
-        
+        customFetch(`http://localhost:3000/films/${id}`, "DELETE")   
     })
 }
-// deleteMovie()
-
 
 // Adds a new movie
 function postMovie(){
@@ -76,14 +88,10 @@ function postMovie(){
         newMovieDetails.runtime = form.runtime.value
         newMovieDetails.showtime = form.showtime.value
         newMovieDetails.description = form.description.value
-        console.log(newMovieDetails)
         
-        customFetch("http://localhost:3000/films", "POST", newMovieDetails) 
-        
+        customFetch("http://localhost:3000/films", "POST", newMovieDetails)  
     })
 }
-// postMovie()
-
 
 // Updates details of a specific movie
 function updateMovie(){
@@ -101,9 +109,8 @@ function updateMovie(){
         customFetch(`http://localhost:3000/films/${newMovieDetails.id}`, "PATCH", newMovieDetails)
     })
 }
-// updateMovie()
 
-
+// SECTION: FETCH FUNCTIONS--------------------------------------------------------------------
 // customs GET, POST, PATCH and DELETE functions of fetch
 function customFetch(url,type,data){
     if(type === "GET"){
