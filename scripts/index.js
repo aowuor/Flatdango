@@ -1,16 +1,6 @@
-// function Movie(id,...details){
-//     this.id =  id,
-//     this.title = title,
-//     this.runtime = runtime,
-//     this.capacity = capicty,
-//     this.showtime = showtime,
-//     this.tickets_sold = tickets_sold,
-//     this.description = description,
-//     this.poster = poster,
-// };
 
 let newMovieDetails = {};
-// let currentMovie;
+let availableTicket;
 
 //SECTION: HANDLES FRONTEND DISPLAY-----------------------------------------------------------
 
@@ -27,6 +17,7 @@ function displaylist(movies){
         li.addEventListener("click", function(){
             currentMovie = movie;
             displayMovieDetails(movies[movie]);
+            handleBuyTicket(movies[movie]);
         })    
     } 
 }
@@ -43,15 +34,21 @@ function displayMovieDetails(movie){
     showtime.innerText = `Showtime: ${movie.showtime}`
     description = document.getElementById('movieDescription')
     description.innerText = movie.description
+}
 
+
+function handleBuyTicket(movie){
     ticketBtn = document.getElementById('buyTicket')
     ticketBtn.addEventListener("click", function(){
-        let availableTicket = movie.capacity - movie.tickets_sold
-        if(availableTicket <= 0){
-            alert("SOLD OUT")  
-        }
+        movie.tickets_sold++;
+        availableTicket = movie.capacity - movie.tickets_sold;
+
+        newMovieDetails.id = movie.id
+        newMovieDetails.tickets_sold = movie.tickets_sold
+        customFetch(`http://localhost:3000/films/${newMovieDetails.id}`, "PATCH", newMovieDetails)
     })
 }
+
 
 function handlePostUpdateDelete(){
     let updatebtn = document.getElementById('updatebtn')
