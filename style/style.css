@@ -25,6 +25,7 @@ body{
     height: 85vh;
     background-color: rgb(242, 248, 246);
     padding: 2%;
+    overflow-y: scroll;
 
 }
 .list_heading{
@@ -35,9 +36,11 @@ body{
 
 .list_container ul li{
     list-style: none;
-    height: 4vh;
+    height: auto;
+    min-height: 4vh;
     padding-top: 0.5%;  
     font-size: 0.9em;
+    overflow-wrap: break-word;
 }
 .list_container ul li:hover{
     background-color: blue;
@@ -49,6 +52,12 @@ body{
     background-image: linear-gradient(blue, lightblue);
     padding: 2%;
     display: flex;
+}
+
+.movie_detail button{
+    background-color: rgb(194, 29, 183);
+    padding: 2%;
+
 }
 .extra_details{
     display: flex;
@@ -65,8 +74,25 @@ body{
 .form_container div h4{
     color: rgb(194, 29, 183);
 }
+
 .input{
     margin: 3% 0%;
     width: 100%;
     display: block;
+}
+#form label{
+    font-size: 0.9em;
+}
+#form button{
+    background-color: green;
+    padding: 2%;
+    margin: 2% 0.5%;
+}
+#deleteForm{
+    margin-top: 20%;
+}
+
+#deleteForm #deletebtn{
+    background-color: brown;
+    padding: 2%;
 }

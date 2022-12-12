@@ -1,6 +1,7 @@
 
 let newMovieDetails = {};
 let availableTicket;
+let currentMovie = {};
 
 //SECTION: HANDLES FRONTEND DISPLAY-----------------------------------------------------------
 
@@ -14,13 +15,35 @@ function displaylist(movies){
         li.innerText = movies[movie].title
         ul.appendChild(li)
 
+        currentMovie = movies[movie]
+
         li.addEventListener("click", function(){
-            currentMovie = movie;
-            displayMovieDetails(movies[movie]);
-            handleBuyTicket(movies[movie]);
-        })    
+            currentMovie = movies[movie]
+            availableTicket = currentMovie.capacity - currentMovie.tickets_sold
+            let tickets = document.getElementById('movieTickets')
+            tickets.innerText = `Available Tickets: ${availableTicket}`
+            
+            displayMovieDetails(movies[movie]); 
+        })      
     } 
 }
+
+// Reduces the number of available tickets on every click of "Buy Ticket" button and alert when tickets are sold
+function handleBuyTicket(){
+    let ticketBtn = document.getElementById('buyTicket')
+    ticketBtn.addEventListener("click", function(){
+        if(currentMovie.capacity > currentMovie.tickets_sold){
+            currentMovie.tickets_sold++
+            availableTicket = currentMovie.capacity - currentMovie.tickets_sold
+
+            customFetch(`http://localhost:3000/films/${newMovieDetails.id}`, "PATCH", newMovieDetails)
+        }
+   
+        let tickets = document.getElementById('movieTickets')
+        tickets.innerText = `Available Tickets: ${availableTicket}`  
+    })
+}
+handleBuyTicket()
 
 // Renders details of selected movie
 function displayMovieDetails(movie){
@@ -28,28 +51,20 @@ function displayMovieDetails(movie){
     title.innerText = movie.title
     poster= document.getElementById('moviePoster')
     poster.src = movie.poster
+    description = document.getElementById('movieDescription')
+    description.innerText = movie.description
+    console.log(movie.id)
+    id = document.getElementById('movieId')
+    id.innerText = `ID: ${movie.id}` 
     runtime = document.getElementById('moviesRuntime')
     runtime.innerText = `Runtime: ${movie.runtime}` 
     showtime = document.getElementById('movieShowtime')
     showtime.innerText = `Showtime: ${movie.showtime}`
-    description = document.getElementById('movieDescription')
-    description.innerText = movie.description
 }
 
 
-function handleBuyTicket(movie){
-    ticketBtn = document.getElementById('buyTicket')
-    ticketBtn.addEventListener("click", function(){
-        movie.tickets_sold++;
-        availableTicket = movie.capacity - movie.tickets_sold;
 
-        newMovieDetails.id = movie.id
-        newMovieDetails.tickets_sold = movie.tickets_sold
-        customFetch(`http://localhost:3000/films/${newMovieDetails.id}`, "PATCH", newMovieDetails)
-    })
-}
-
-
+// Calls post, pastch and delete functions depending on button clicked
 function handlePostUpdateDelete(){
     let updatebtn = document.getElementById('updatebtn')
     let addbtn = document.getElementById('addbtn')
@@ -58,7 +73,6 @@ function handlePostUpdateDelete(){
     updatebtn.addEventListener("click", updateMovie)
     addbtn.addEventListener("click", postMovie)
     deletebtn.addEventListener("click", deleteMovie)
-
 }
 
 handlePostUpdateDelete()
@@ -85,8 +99,11 @@ function postMovie(){
         newMovieDetails.runtime = form.runtime.value
         newMovieDetails.showtime = form.showtime.value
         newMovieDetails.description = form.description.value
+        newMovieDetails.capacity = form.capacity.value
+        newMovieDetails.tickets_sold = form.tickets_sold.value
         
         customFetch("http://localhost:3000/films", "POST", newMovieDetails)  
+        postForm.reset()
     })
 }
 
@@ -95,13 +112,13 @@ function updateMovie(){
     let updateForm = document.getElementById('form')
     updateForm.addEventListener("submit", (e) => {
         e.preventDefault()
+        
         newMovieDetails.id = form.id.value
-        newMovieDetails.title = form.title.value
         newMovieDetails.poster = form.poster.value
         newMovieDetails.runtime = form.runtime.value
         newMovieDetails.showtime = form.showtime.value
         newMovieDetails.description = form.description.value
-        console.log(newMovieDetails)
+        
 
         customFetch(`http://localhost:3000/films/${newMovieDetails.id}`, "PATCH", newMovieDetails)
     })
