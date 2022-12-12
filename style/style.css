@@ -4,7 +4,6 @@
     box-sizing: border-box;
 }
 body{
-    background-color: aqua;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .container{
@@ -13,7 +12,7 @@ body{
 }
 .heading_container{
     height: 15%;
-    background-color: aquamarine;
+    background-color: rgb(242, 248, 246);
     padding: 2%;
     text-align: center;
 }
@@ -22,33 +21,32 @@ body{
 }
 
 .side_bar{
-    width: 25%;
+    width: 22%;
     height: 85vh;
-    background-color: rgb(189, 202, 202);
+    background-color: rgb(242, 248, 246);
     padding: 2%;
+
 }
 .list_heading{
     padding: 5% 1%;
     /* background-color: antiquewhite; */
-    color: brown;
+    color: rgb(194, 29, 183);
 }
-.list_container ul{
 
-}
 .list_container ul li{
     list-style: none;
-    height: 5vh;
-    padding-top: 2%
-    
+    height: 4vh;
+    padding-top: 0.5%;  
+    font-size: 0.9em;
 }
 .list_container ul li:hover{
-    background-color: bisque;
+    background-color: blue;
 }
 
 .movie_detail{
-    width: 50%;
+    width: 53%;
     height: 85vh;
-    background-color: lightblue;
+    background-image: linear-gradient(blue, lightblue);
     padding: 2%;
     display: flex;
 }
@@ -62,7 +60,10 @@ body{
     width: 25%;
     height: 85vh;
     padding: 3% 1%;
-    background-color: lightsalmon;
+    background-color: rgb(242, 248, 246);
+}
+.form_container div h4{
+    color: rgb(194, 29, 183);
 }
 .input{
     margin: 3% 0%;

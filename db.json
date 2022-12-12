@@ -153,13 +153,21 @@
     },
     {
       "id": "27",
-      "title": "The Giant Gila Monster",
+      "title": "Best movie",
       "runtime": "108",
       "capacity": 50,
       "showtime": "04:00PM",
       "tickets_sold": 45,
       "description": "A giant lizard terrorizes a rural Texas community and a heroic teenager attempts to destroy the creature.",
       "poster": "https://www.gstatic.com/tv/thumb/v22vodart/2157/p2157_v_v8_ab.jpg"
+    },
+    {
+      "id": "99",
+      "title": "All about Lucy",
+      "poster": "https://www.gstatic.com/tv/thumb/v22vodart/2157/p2157_v_v8_ab.jpg",
+      "runtime": "1",
+      "showtime": "2.30",
+      "description": "all the best"
     }
   ]
 }
