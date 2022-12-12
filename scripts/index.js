@@ -7,14 +7,12 @@
 //     this.tickets_sold = tickets_sold,
 //     this.description = description,
 //     this.poster = poster,
-//   }
+// };
 
-let currentMovie;
+let newMovieDetails = {};
+// let currentMovie;
 
-customFetch("http://localhost:3000/films", "GET")
-// customFetch("http://localhost:3000/films", "POST", newMovie)
-// customFetch("http://localhost:3000/films/25", "DELETE")
-// customFetch("http://localhost:3000/films/27", "PATCH", newMovie)
+customFetch("http://localhost:3000/films", "GET");
 
 
 // Renders list of all movies
@@ -54,18 +52,57 @@ function displayMovieDetails(movie){
     })
 }
 
-function handleForm(){
-    let form = document.getElementById("form")
-    form.addEventListener("submit", (e) => {
+// Deletes movie of specific id
+function deleteMovie(){
+    let deleteForm = document.getElementById('deleteForm')
+    deleteForm.addEventListener("submit", (e) => {
         e.preventDefault()
-        let newForm = new FormData(form)
-        console.log([...newForm])
+        let id = deleteForm.delete.value
+        customFetch(`http://localhost:3000/films/${id}`, "DELETE")  
+        
     })
-    
-    // customFetch("http://localhost:3000/films", "POST", newMovie)
-
 }
-handleForm()
+// deleteMovie()
+
+
+// Adds a new movie
+function postMovie(){
+    let postForm = document.getElementById('form')
+    postForm.addEventListener("submit", (e) => {
+        e.preventDefault()
+        newMovieDetails.id = form.id.value
+        newMovieDetails.title = form.title.value
+        newMovieDetails.poster = form.poster.value
+        newMovieDetails.runtime = form.runtime.value
+        newMovieDetails.showtime = form.showtime.value
+        newMovieDetails.description = form.description.value
+        console.log(newMovieDetails)
+        
+        customFetch("http://localhost:3000/films", "POST", newMovieDetails) 
+        
+    })
+}
+// postMovie()
+
+
+// Updates details of a specific movie
+function updateMovie(){
+    let updateForm = document.getElementById('form')
+    updateForm.addEventListener("submit", (e) => {
+        e.preventDefault()
+        newMovieDetails.id = form.id.value
+        newMovieDetails.title = form.title.value
+        newMovieDetails.poster = form.poster.value
+        newMovieDetails.runtime = form.runtime.value
+        newMovieDetails.showtime = form.showtime.value
+        newMovieDetails.description = form.description.value
+        console.log(newMovieDetails)
+
+        customFetch(`http://localhost:3000/films/${newMovieDetails.id}`, "PATCH", newMovieDetails)
+    })
+}
+// updateMovie()
+
 
 // customs GET, POST, PATCH and DELETE functions of fetch
 function customFetch(url,type,data){
