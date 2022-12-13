@@ -73,6 +73,8 @@ function handlePostUpdateDelete(){
     updatebtn.addEventListener("click", updateMovie)
     addbtn.addEventListener("click", postMovie)
     deletebtn.addEventListener("click", deleteMovie)
+
+    
 }
 
 handlePostUpdateDelete()
@@ -85,6 +87,8 @@ function deleteMovie(){
         e.preventDefault()
         let id = deleteForm.delete.value
         customFetch(`http://localhost:3000/films/${id}`, "DELETE")   
+
+        location.reload()
     })
 }
 
@@ -104,6 +108,8 @@ function postMovie(){
         
         customFetch("http://localhost:3000/films", "POST", newMovieDetails)  
         postForm.reset()
+
+        location.reload()
     })
 }
 
@@ -121,6 +127,8 @@ function updateMovie(){
         
 
         customFetch(`http://localhost:3000/films/${newMovieDetails.id}`, "PATCH", newMovieDetails)
+
+        location.reload()
     })
 }
 

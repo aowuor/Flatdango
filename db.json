@@ -152,14 +152,6 @@
       "poster": "https://www.gstatic.com/tv/thumb/v22vodart/37991/p37991_v_v8_aa.jpg"
     },
     {
-      "id": "50",
-      "title": "The Innocent Man",
-      "poster": "",
-      "runtime": "120",
-      "showtime": "11.00pm",
-      "description": "There has been a murder in town and young drug addict is has been found guilty. He is scheduled for hanging but he insists he is innocent"
-    },
-    {
       "id": "65",
       "title": "A Painted House",
       "poster": "none",
@@ -168,6 +160,16 @@
       "description": "Deadly family secrets",
       "capacity": "55",
       "tickets_sold": "20"
+    },
+    {
+      "id": "59",
+      "title": "The Innocent Man",
+      "poster": "none",
+      "runtime": "120",
+      "showtime": "03.30PM",
+      "description": "There has been a murder in town and a young drug addict has been found guilty. He is scheduled for hanging but he insists he is innocent",
+      "capacity": "60",
+      "tickets_sold": "35"
     }
   ]
 }
